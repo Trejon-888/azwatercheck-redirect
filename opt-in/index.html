@@ -1,34 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=https://aquafeelsolutionsarizona.com/opt-in/">
-<link rel="canonical" href="https://aquafeelsolutionsarizona.com/opt-in/">
-<meta name="robots" content="noindex, follow">
-<title>Aquafeel Solutions Arizona - Moved</title>
-<script>
-  (function() {
-    var newBase = "https://aquafeelsolutionsarizona.com";
-    var path = window.location.pathname + window.location.search + window.location.hash;
-    window.location.replace(newBase + path);
-  })();
-</script>
-<style>
-  body { font-family: system-ui, -apple-system, sans-serif; background: #0E869C; color: #fff;
-         display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 24px; text-align: center; }
-  .box { max-width: 560px; }
-  h1 { font-size: 28px; margin: 0 0 16px; font-weight: 700; }
-  p { font-size: 16px; line-height: 1.6; opacity: 0.92; margin: 0 0 24px; }
-  a { display: inline-block; background: #1D3470; color: #fff; padding: 14px 32px;
-      border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 15px; }
-  a:hover { background: #0F1E50; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opt-In | AZ Water Check</title>
+  <meta name="description" content="Opt in to receive SMS communications from AZ Water Check about your free water quality test appointment. STOP to unsubscribe.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://aquafeelsolutionsarizona.com/opt-in/">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito Sans', sans-serif; color: #fff; background: #1a1a2e; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* Top brand bar */
+    .brand-bar {
+      background: #0f0f2d; text-align: center; padding: 16px 20px;
+      font-size: 15px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+      color: #fff; border-bottom: 3px solid #5BA4C9;
+    }
+
+    /* Main section */
+    .hero {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 60px 24px;
+      background: linear-gradient(135deg, #1a1a3e 0%, #1e2a4a 40%, #1a2040 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: url('/assets/brand/hero-bg-desert-hq.jpg') center center / cover no-repeat;
+      opacity: 0.08; z-index: 0;
+    }
+    .hero__inner {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 80px;
+      max-width: 1000px; width: 100%;
+    }
+
+    /* Left side text */
+    .hero__text { flex: 1; }
+    .hero__text h1 {
+      font-size: 36px; font-weight: 800; line-height: 1.2; margin-bottom: 16px;
+    }
+    .hero__text p {
+      font-size: 18px; opacity: 0.85; line-height: 1.6;
+    }
+
+    /* Right side form card */
+    .form-card {
+      flex: 0 0 400px; background: #fff; border-radius: 16px;
+      padding: 36px 32px; color: #1a1a1a;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%; padding: 12px 14px; border: 1px solid #ddd; border-radius: 8px;
+      font-size: 15px; font-family: inherit; transition: border 0.3s;
+    }
+    .form-group input:focus { border-color: #5BA4C9; outline: none; }
+    .form-group .error-msg {
+      color: #e74c3c; font-size: 13px; margin-top: 4px; display: none;
+    }
+    .form-group input:invalid:not(:placeholder-shown) + .error-msg { display: block; }
+
+    /* Consent checkbox */
+    .consent {
+      display: flex; gap: 10px; align-items: flex-start; margin: 20px 0;
+    }
+    .consent input[type="checkbox"] {
+      margin-top: 4px; width: 18px; height: 18px; flex-shrink: 0;
+      accent-color: #5BA4C9; cursor: pointer;
+    }
+    .consent label {
+      font-size: 12.5px; color: #555; line-height: 1.5; cursor: pointer;
+    }
+
+    /* Submit button */
+    .submit-btn {
+      width: 100%; padding: 14px; background: #4CAF50; color: #fff; border: none;
+      border-radius: 8px; font-size: 16px; font-weight: 700; font-family: inherit;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .submit-btn:hover { background: #43a047; }
+    .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    /* Links below form */
+    .form-links {
+      text-align: center; margin-top: 16px; font-size: 13px;
+    }
+    .form-links a { color: #1a1a1a; text-decoration: underline; }
+
+    /* Footer */
+    .footer {
+      background: #0f0f2d; text-align: center; padding: 20px; font-size: 12px;
+      color: rgba(255,255,255,0.6); border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer a { color: #5BA4C9; text-decoration: none; }
+    .footer p { margin-bottom: 4px; }
+
+    /* Success state */
+    .form-success {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .form-success .check { font-size: 52px; color: #4CAF50; margin-bottom: 12px; }
+    .form-success h2 { font-size: 22px; color: #1a1a1a; margin-bottom: 8px; }
+    .form-success p { font-size: 15px; color: #666; }
+    .form-success a { color: #5BA4C9; font-weight: 600; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero__inner { flex-direction: column; gap: 40px; }
+      .form-card { flex: 1; width: 100%; max-width: 100%; }
+      .hero__text h1 { font-size: 28px; }
+      .hero { padding: 40px 20px; }
+    }
+  </style>
 </head>
 <body>
-<div class="box">
-  <h1>We've moved to aquafeelsolutionsarizona.com</h1>
-  <p>AZ Water Check is now Aquafeel Solutions Arizona. Redirecting you to our new home...</p>
-  <a href="https://aquafeelsolutionsarizona.com/opt-in/">Continue to new site</a>
-</div>
+
+  <!-- Brand Bar -->
+  <div class="brand-bar">AZ Water Check</div>
+
+  <!-- Main Section -->
+  <section class="hero">
+    <div class="hero__inner">
+      <!-- Left Text -->
+      <div class="hero__text">
+        <h1>Let's Get In Touch</h1>
+        <p>Got a question?<br>We are here to help!</p>
+      </div>
+
+      <!-- Right Form Card -->
+      <div class="form-card">
+        <form id="optInForm">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="first_name" placeholder="First Name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="last_name" placeholder="Last Name">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="Phone (optional)" pattern="[\d\s\-\(\)\+]{10,}">
+            <div class="error-msg">Please enter a valid phone number</div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email (optional)">
+            <div class="error-msg">Please enter a valid email address</div>
+          </div>
+
+          <!-- TRANSACTIONAL SMS Consent (REQUIRED) -->
+          <div class="consent">
+            <input type="checkbox" id="smsTransactional" required>
+            <label for="smsTransactional">
+              I consent to receive transactional SMS notifications from AZ Water Check, a division of Sol Deja Vu, for the purpose of scheduling water tests, appointment confirmations, reminders, and follow-up. Message frequency varies. Message &amp; data rates may apply. Reply STOP to unsubscribe at any time.
+              <br><br>
+              Reply HELP for help. By submitting this form, you agree to receive text messages from us. Standard message and data rates apply.
+            </label>
+          </div>
+
+          <!-- MARKETING SMS Consent (OPTIONAL) -->
+          <div class="consent">
+            <input type="checkbox" id="smsMarketing">
+            <label for="smsMarketing">
+              I also consent to receive marketing and promotional SMS communications from AZ Water Check about water quality services, special offers, and updates. Message frequency varies. Message &amp; data rates may apply. Reply STOP to unsubscribe at any time.
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+        </form>
+
+        <!-- Success State -->
+        <div class="form-success" id="formSuccess">
+          <div class="check">&#10003;</div>
+          <h2>Thank You!</h2>
+          <p>We received your request. A water specialist will contact you within 24 hours.</p>
+          <p style="margin-top: 12px;"><a href="/">Back to AZ Water Check</a></p>
+        </div>
+
+        <div class="form-links">
+          <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-and-conditions/">Terms of Service</a>
+        </div>
+        <p style="text-align:center; font-size:12px; color:#999; margin-top:12px;">
+          Questions? Call <a href="tel:+14808000332" style="color:#1a1a1a;">(480) 800-0332</a> or email <a href="mailto:info@azwatercheck.com" style="color:#1a1a1a;">info@azwatercheck.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Copyright 2026 | All Rights Reserved | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-and-conditions/">Terms & Conditions</a></p>
+    <p>1916 N Pennington Dr</p>
+    <p>Chandler, AZ 85224</p>
+  </footer>
+
+  <script>
+    // Form validation + submit
+    document.getElementById('optInForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var phone = document.getElementById('phone');
+      var email = document.getElementById('email');
+      var transactional = document.getElementById('smsTransactional');
+      var valid = true;
+
+      // Phone is OPTIONAL — only validate format if user provided one
+      phone.nextElementSibling.style.display = 'none';
+      phone.style.borderColor = '#ddd';
+      if (phone.value.trim()) {
+        var phoneDigits = phone.value.replace(/\D/g, '');
+        if (phoneDigits.length < 10) {
+          phone.nextElementSibling.style.display = 'block';
+          phone.style.borderColor = '#e74c3c';
+          valid = false;
+        }
+      }
+
+      // Email is OPTIONAL — only validate format if user provided one
+      email.nextElementSibling.style.display = 'none';
+      email.style.borderColor = '#ddd';
+      if (email.value.trim() && !email.validity.valid) {
+        email.nextElementSibling.style.display = 'block';
+        email.style.borderColor = '#e74c3c';
+        valid = false;
+      }
+
+      // Transactional consent is REQUIRED
+      if (!transactional.checked) {
+        alert('Please check the Transactional SMS consent box to schedule your free water test.');
+        valid = false;
+      }
+
+      if (valid) {
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      }
+    });
+
+    // Clear errors on input
+    document.querySelectorAll('#optInForm input').forEach(function(input) {
+      input.addEventListener('input', function() {
+        var err = this.nextElementSibling;
+        if (err && err.classList.contains('error-msg')) {
+          err.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
